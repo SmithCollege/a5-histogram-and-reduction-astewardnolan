@@ -3,7 +3,7 @@
 #include <sys/time.h>
 
 
-#define HISTOGRAM_SIZE 256
+#define HISTOGRAM_SIZE 1024
 #define BLOCK_SIZE 256 
 
 __global__ void histogramKernel(unsigned char *d_data, unsigned int *d_histogram, int numElements) {

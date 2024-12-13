@@ -2,7 +2,7 @@
 #include <cuda_runtime.h>
 #include <sys/time.h>
 
-#define HISTOGRAM_SIZE 256
+#define HISTOGRAM_SIZE 1024
 #define BLOCK_SIZE 256  // The number of threads per block
 
 //Sources: https://tatourian.blog/2013/10/29/histogram-on-gpu-using-cuda/

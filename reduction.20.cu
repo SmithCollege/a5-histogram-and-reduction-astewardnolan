@@ -2,7 +2,7 @@
 #include <cuda_runtime.h>
 #include <sys/time.h>
 
-#define BLOCK_SIZE 1024
+#define BLOCK_SIZE 512
 
 //resources
 

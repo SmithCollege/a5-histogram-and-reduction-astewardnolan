@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define HISTOGRAM_SIZE 256
+#define HISTOGRAM_SIZE 1024
 
-void generateHistogram(int *arr, int size, int *histogram) {
+void generateHistogram(unsigned char *arr, int size, unsigned int *histogram) {
     // Initialize the histogram with 0
     for (int i = 0; i < HISTOGRAM_SIZE; i++) {
         histogram[i] = 0;
@@ -39,16 +39,27 @@ void printHistogram(int *histogram) {
 }
 
 int main() {
-    int arr[] = {255, 0, 0, 1, 2, 2, 3, 5, 255, 255, 128, 128, 128, 64, 32, 32, 0, 100};
-    int size = sizeof(arr) / sizeof(arr[0]);
+    int numElements = 1000000;  // Total number of elements in the input array
 
-    // Create an array to store histogram counts
-    int histogram[HISTOGRAM_SIZE];
+    // Dynamically allocate memory for the data and histogram
+    unsigned char *h_data = (unsigned char *)malloc(numElements * sizeof(unsigned char));
+    unsigned int *h_histogram = (unsigned int *)calloc(HISTOGRAM_SIZE, sizeof(unsigned int));
+
+    if (h_data == NULL || h_histogram == NULL) {
+        printf("Memory allocation failed!\n");
+        return -1;
+    }
+
+    // Initialize input data with random values between 0-127 (for histogram)
+    for (int i = 0; i < numElements; i++) {
+        h_data[i] = rand() % HISTOGRAM_SIZE;
+    }
+
 
     double start = get_clock();
 
     // Generate the histogram from the array
-    generateHistogram(arr, size, histogram);
+    generateHistogram(h_data, numElements, h_histogram);
     double end = get_clock();
 
     printf("time per call: %f ns\n", (end-start) );
@@ -57,4 +68,5 @@ int main() {
     //printHistogram(histogram);
 
     return 0;
+
 }
